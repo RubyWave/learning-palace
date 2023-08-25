@@ -1,8 +1,8 @@
 const path = require('path');
 //to have CSS in separate files, not in JS
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -15,7 +15,8 @@ module.exports = {
               "**/*.php"
             ]
 
-        })
+        }),
+        new ESLintPlugin()
     ],
     watchOptions: {
         //time that webpack wait to compile files

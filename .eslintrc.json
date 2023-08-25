@@ -1,0 +1,13 @@
+{
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2024
+    },
+    "rules": {
+        "max-len": [
+            1,
+            70,
+            2
+        ]
+    }
+}

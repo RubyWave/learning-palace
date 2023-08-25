@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("I'm loaded...");
+var temp = 42;
+console.log("I'm loaded... " + temp);
 
 }, false);
