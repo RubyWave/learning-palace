@@ -25,7 +25,7 @@ npm run buildprod
 
 ## Running project via BrowserSync
 
-There is configured BrowserSync in webpack config file, you need only change proxy and port settings and then run it with command:
+Set your proxy and port in .browsersync.config.json file and run command:
 ```
 npm run watch
 ```

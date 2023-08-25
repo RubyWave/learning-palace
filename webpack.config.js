@@ -4,13 +4,30 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
+/**
+ * Default BrowserSyncPlugin options.
+ */
+let browserSyncPluginOptions = {
+	port: 3000,
+	proxy: "http://example.test/",
+};
+try {
+	const browserSyncCustomConfig = require("./.browsersync.config.json");
+
+	/**
+	 * Override default BrowserSyncPlugin options.
+	 */
+	browserSyncPluginOptions.port = browserSyncCustomConfig.port;
+	browserSyncPluginOptions.proxy = browserSyncCustomConfig.proxy;
+} catch (e) {}
+
 module.exports = {
 	mode: "development",
 	plugins: [
 		new MiniCssExtractPlugin(),
 		new BrowserSyncPlugin({
-			port: 3000,
-			proxy: "http://learningplace.test/",
+			port: browserSyncPluginOptions.port,
+			proxy: browserSyncPluginOptions.proxy,
 			files: ["**/*.php"],
 		}),
 		new ESLintPlugin(),
