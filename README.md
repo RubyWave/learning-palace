@@ -29,3 +29,10 @@ There is configured BrowserSync in webpack config file, you need only change pro
 ```
 npm run watch
 ```
+
+## Features ##
+
+- set up webpack
+- SCSS compiling
+- PHP class autoloader
+- Prettier and ESLint
