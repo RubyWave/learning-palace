@@ -1,6 +1,5 @@
 <?php get_header(); ?>
     <main>
-
         <?php
         if ( have_posts() ) {
 
