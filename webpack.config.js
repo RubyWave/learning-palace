@@ -29,6 +29,7 @@ module.exports = {
 			port: browserSyncPluginOptions.port,
 			proxy: browserSyncPluginOptions.proxy,
 			files: ["**/*.php"],
+			cors: "true",
 		}),
 		new ESLintPlugin(),
 	],

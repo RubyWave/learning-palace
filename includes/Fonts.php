@@ -28,7 +28,7 @@ class Fonts {
             rel="preload"
             href="<?php echo $themeUrl . '/src/fonts/poppins-v20-latin_latin-ext-regular.woff2'; ?>"
             as="font"
-            type="font/opentype"
+            type="font/woff"
             crossorigin>
         <?php
     }
