@@ -42,4 +42,4 @@ npm run watch
 
 - default 404 page
 - default mixin and variables for responsive styles
-- 
+- splitting CSS output files to be separate to allow selective loading
