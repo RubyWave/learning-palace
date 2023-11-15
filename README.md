@@ -36,3 +36,10 @@ npm run watch
 - SCSS compiling
 - PHP class autoloader
 - Prettier and ESLint
+
+
+## Stuff to add ##
+
+- default 404 page
+- default mixin and variables for responsive styles
+- 
