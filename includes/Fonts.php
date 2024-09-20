@@ -1,6 +1,6 @@
 <?php 
 
-namespace LearningPalace;
+namespace Palace;
 
 /**
  * Adding fonts

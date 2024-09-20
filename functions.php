@@ -10,5 +10,7 @@ if (file_exists( dirname(__FILE__) . '/vendor/autoload.php')) {
 }
 
 
-new LearningPalace\EnqueStylesScripts();
-new LearningPalace\Fonts();
+new \Palace\EnqueStylesScripts();
+new \Palace\Fonts();
+
+include_once( __DIR__ . '/block-includer.php');

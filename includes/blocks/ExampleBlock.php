@@ -1,0 +1,114 @@
+<?php
+
+namespace Palace\Blocks;
+
+
+/**
+ * Creating of ACF block
+ */
+class ExampleBlock {
+    const SLUG = 'example';
+    const HANDLE_JS = 'example-block-scripts';
+    const HANDLE_CSS = 'example-block-styles';
+
+    private $title;
+    private $description;
+    private $icon;
+    private $keywords;
+
+
+    /**
+     * Actions to register block
+     */
+    public function __construct() {
+
+        //in case ACF Pro is not installed, or page is using old version
+        if ( ! function_exists( 'acf_register_block_type' ) ) {
+			return;
+		}
+
+        $this->title          = esc_attr__( 'Example block', 'palace-backend' );
+        $this->description    = esc_attr__( 'This is just an example block', 'palace-backend' );
+        $this->icon           = 'admin-comments';
+        $this->keywords       = [ 'example block' ];
+
+        add_action( 'wp_enqueue_scripts', [ $this, 'registerStylesAndScript' ] );
+        add_action( 'acf/init', [ $this, 'registerACFBlock' ] );
+    }
+
+    /**
+     * Register ACF block
+     *
+     */
+    public function registerACFBlock() {
+        acf_register_block_type( [
+            'name'            => self::SLUG,
+            'keywords'        => $this->keywords,
+            'icon'            => $this->icon,
+            'title'           => $this->title,
+            'description'     => $this->description,
+            'render_callback' => [ $this, 'renderTemplate' ],
+            'enqueue_assets'  => function () {
+                wp_enqueue_style( self::HANDLE_CSS );
+                // wp_enqueue_script( self::HANDLE_JS ); // to include JS, uncoment this line and line in registerStylesAndScript function
+            },
+            // 'example'  => [
+            //     'attributes' => [
+            //         'mode' => 'preview',
+            //         'data' => [
+            //             'preview_image_help' => Helpers::getThemeUrl() . '/img/blocks/'.self::SLUG.'-preview.jpg',
+            //             "is_preview"         => true
+            //         ],
+            //     ],
+            // ],
+            'supports' => [
+                'align'  => true,
+                'mode'   => true,
+                'jsx'    => true,
+                'anchor' => true
+            ],
+        ] );
+    }
+
+    /**
+     * Register styles and scripts
+     *
+     */
+    public function registerStylesAndScript() {
+        wp_register_style( self::HANDLE_CSS, get_template_directory_uri() . '/dist/block_' . self::SLUG . '.css' );
+
+        // to include JS, uncoment line below and line in enqueue_assets in block registration
+        // wp_register_script( self::HANDLE_JS , Helpers::getThemeUrl() . '/dist/block_' . self::SLUG  .'.bundle.js', false, Helpers::getThemeVersion(), true );
+    }
+
+    
+
+
+    /**
+     * Set data and render template
+     *
+     *
+     */
+    public function renderTemplate($blockArgs) {
+        $args = $blockArgs;
+
+        // unique ID created out of Gutenberg ID and slug. If anchor is provied in Gutenberg, it replaces ID
+        $args['id'] = self::SLUG . '-' . $blockArgs['id'];
+        if ( !empty( $blockArgs['anchor'] ) ) {
+            $args['id'] = $blockArgs['anchor'];
+        }
+
+        // Gutenberg extra class
+        $args['className'] =  '';
+        if ( ! empty( $blockArgs['className'] ) ) {
+            $args['className'] .= ' ' . esc_attr( $blockArgs['className'] );
+        }
+
+        // Gutenberg set aligment
+        if ( !empty($blockArgs['align'] ) ) {
+            $args['className'] .= ' align' . esc_attr( $blockArgs['align'] );
+        }
+
+        get_template_part('blocks/' . self::SLUG . '/' . self::SLUG, '', $args);
+    }
+}

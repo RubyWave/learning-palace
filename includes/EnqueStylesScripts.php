@@ -1,6 +1,6 @@
 <?php 
 
-namespace LearningPalace;
+namespace Palace;
 
 /**
  * Enquing all styles and all scripts
