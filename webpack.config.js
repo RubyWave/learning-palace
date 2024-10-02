@@ -31,7 +31,6 @@ function generateEntryPoints() {
 
 	// adding block entry points
 	entryPoints = glob.sync("./blocks/**/*-includes.js").reduce((acc, path) => {
-		console.log(path);
 		// path is later used as a [name]
 		let fileName = path.substring(path.lastIndexOf("/") + 1); // striping path
 		fileName = fileName.substring(0, fileName.lastIndexOf(".")); //striping extension

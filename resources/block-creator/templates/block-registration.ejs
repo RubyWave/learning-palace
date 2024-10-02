@@ -4,12 +4,12 @@ namespace Palace\Blocks;
 
 
 /**
- * Registration of a Example block
+ * Registration of a <%- blockData.name %> block
  */
-class ExampleBlock {
-    const SLUG = 'example';
-    const HANDLE_JS = 'example-block-scripts';
-    const HANDLE_CSS = 'example-block-styles';
+class <%- blockData.camelCaseSlug %>Block {
+    const SLUG = '<%- blockData.slug %>';
+    const HANDLE_JS = '<%- blockData.slug %>-block-scripts';
+    const HANDLE_CSS = '<%- blockData.slug %>-block-styles';
 
     private $title;
     private $description;
@@ -27,10 +27,10 @@ class ExampleBlock {
 			return;
 		}
 
-        $this->title          = esc_attr__( 'Example block', 'palace-blocks' );
-        $this->description    = esc_attr__( 'This is just an example block', 'palace-blocks' );
+        $this->title          = esc_attr__( '<%- blockData.name %> block', 'palace-blocks' );
+        $this->description    = esc_attr__( '<%- blockData.description %>', 'palace-blocks' );
         $this->icon           = 'admin-comments';
-        $this->keywords       = [ 'example block' ];
+        $this->keywords       = [ '<%- blockData.slug %> <%- blockData.name %>' ];
 
         add_action( 'wp_enqueue_scripts', [ $this, 'registerStylesAndScript' ] );
         add_action( 'acf/init', [ $this, 'registerACFBlock' ] );
@@ -50,7 +50,11 @@ class ExampleBlock {
             'render_callback' => [ $this, 'renderTemplate' ],
             'enqueue_assets'  => function () {
                 wp_enqueue_style( self::HANDLE_CSS );
+                <% if (blockData.JSincluded === true) { %>
+                wp_enqueue_script( self::HANDLE_JS );
+                <% } else { %>
                 // wp_enqueue_script( self::HANDLE_JS ); // to include JS, uncoment this line and line in registerStylesAndScript function
+                <% } %>
             },
             // 'example'  => [
             //     'attributes' => [
@@ -76,9 +80,12 @@ class ExampleBlock {
      */
     public function registerStylesAndScript() {
         wp_register_style( self::HANDLE_CSS, get_template_directory_uri() . '/dist/block_' . self::SLUG . '.css' );
-
+        <% if (blockData.JSincluded === true) { %>
+        wp_register_script( self::HANDLE_JS , get_template_directory_uri() . '/dist/block_' . self::SLUG  .'.bundle.js');
+        <% } else { %>
         // to include JS, uncoment line below and line in enqueue_assets in block registration
-        // wp_register_script( self::HANDLE_JS , get_template_directory_uri() '/dist/block_' . self::SLUG  .'.bundle.js' );
+        // wp_register_script( self::HANDLE_JS , get_template_directory_uri() . '/dist/block_' . self::SLUG  .'.bundle.js');
+        <% } %>
     }
 
     

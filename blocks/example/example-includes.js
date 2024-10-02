@@ -1,3 +1,7 @@
+/**
+ * Example block includes
+ */
+
 //scripts
 import "./example-script";
 
