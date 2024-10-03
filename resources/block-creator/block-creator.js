@@ -13,7 +13,7 @@ const rl = readline.createInterface({
 const blockData = {
 	name: "",
 	slug: "",
-	camelCaseSlug: "", // used for some file names
+	pascalCaseSlug: "", // used for some file names
 	description: "This is just undescribed block.",
 	JSincluded: false,
 };
@@ -37,7 +37,7 @@ function getBlockName() {
 			blockData.slug = slugify(name, {
 				lower: true,
 			});
-			blockData.camelCaseSlug = slugToPascalCase(blockData.slug);
+			blockData.pascalCaseSlug = slugToPascalCase(blockData.slug);
 			resolve();
 		});
 	});
@@ -50,7 +50,7 @@ function getBlockSlug() {
 				blockData.slug = slugify(slug, {
 					lower: true,
 				});
-				blockData.camelCaseSlug = slugToPascalCase(blockData.slug);
+				blockData.pascalCaseSlug = slugToPascalCase(blockData.slug);
 			}
 
 			resolve();
@@ -189,7 +189,7 @@ function createTemplateFile() {
 }
 
 function createRegistrationFile() {
-	const path = "./includes/blocks/" + blockData.camelCaseSlug + "Block.php";
+	const path = "./includes/blocks/" + blockData.pascalCaseSlug + "Block.php";
 	return new Promise((resolve, reject) => {
 		try {
 			var template = fs.readFileSync(
@@ -215,7 +215,7 @@ function addIncludeFile() {
 	return new Promise((resolve, reject) => {
 		fs.appendFile(
 			path,
-			`new Palace\\Blocks\\${blockData.camelCaseSlug}Block();\n`,
+			`new Palace\\Blocks\\${blockData.pascalCaseSlug}Block();\n`,
 			function (e) {
 				if (e) reject(`Error: ${e} `);
 				console.log(
