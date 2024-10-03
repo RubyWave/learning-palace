@@ -29,7 +29,7 @@ class <%- blockData.camelCaseSlug %>Block {
 
         $this->title          = esc_attr__( '<%- blockData.name %> block', 'palace-blocks' );
         $this->description    = esc_attr__( '<%- blockData.description %>', 'palace-blocks' );
-        $this->icon           = 'admin-comments';
+        $this->icon           = 'admin-comments'; // dash-icon icon
         $this->keywords       = [ '<%- blockData.slug %> <%- blockData.name %>' ];
 
         add_action( 'wp_enqueue_scripts', [ $this, 'registerStylesAndScript' ] );
@@ -60,7 +60,7 @@ class <%- blockData.camelCaseSlug %>Block {
             //     'attributes' => [
             //         'mode' => 'preview',
             //         'data' => [
-            //             'preview_image_help' => Helpers::getThemeUrl() . '/img/blocks/'.self::SLUG.'-preview.jpg',
+            //             'preview_image_help' => get_template_directory_uri() . '/img/blocks/'.self::SLUG.'-preview.jpg',
             //             "is_preview"         => true
             //         ],
             //     ],

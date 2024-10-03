@@ -29,7 +29,7 @@ class ExampleBlock {
 
         $this->title          = esc_attr__( 'Example block', 'palace-blocks' );
         $this->description    = esc_attr__( 'This is just an example block', 'palace-blocks' );
-        $this->icon           = 'admin-comments';
+        $this->icon           = 'admin-comments'; // dash-icon icon
         $this->keywords       = [ 'example block' ];
 
         add_action( 'wp_enqueue_scripts', [ $this, 'registerStylesAndScript' ] );
@@ -56,7 +56,7 @@ class ExampleBlock {
             //     'attributes' => [
             //         'mode' => 'preview',
             //         'data' => [
-            //             'preview_image_help' => Helpers::getThemeUrl() . '/img/blocks/'.self::SLUG.'-preview.jpg',
+            //             'preview_image_help' => get_template_directory_uri() . '/img/blocks/'.self::SLUG.'-preview.jpg',
             //             "is_preview"         => true
             //         ],
             //     ],
