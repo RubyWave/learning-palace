@@ -43,7 +43,6 @@ function generateEntryPoints() {
 	// main files of the theme
 	entryPoints["main"] = "./src/index.js";
 
-	console.log(entryPoints);
 	return entryPoints;
 }
 
